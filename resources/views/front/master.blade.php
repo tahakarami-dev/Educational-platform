@@ -30,7 +30,7 @@
 <livewire:front.header>
 
 <!-- **************** MAIN CONTENT START **************** -->
-<livewire:front.home>
+    {{$slot}}
 <!-- **************** MAIN CONTENT END **************** -->
 
 <livewire:front.footer>
