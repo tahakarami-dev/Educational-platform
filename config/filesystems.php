@@ -37,6 +37,13 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'private' => [
+            'driver' => 'local',
+            'root' => public_path(),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'report' => false,
+        ],
 
         'public' => [
             'driver' => 'local',
