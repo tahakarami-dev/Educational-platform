@@ -5,34 +5,40 @@
                 <div class="card-body">
                     <div class="container">
                         <h6 class="card-title">ایجاد کاربر</h6>
-                        <form method="POST" >
+                        @if(session()->has('message'))
+                            <div class="alert alert-info">
+                                {{session('message')}}
+                            </div>
+                        @endif
+
+                        <form wire:submit="saveuser">
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">نام و نام خانوادگی</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control text-left"  dir="rtl" name="name">
+                                    <input type="text" class="form-control text-left"  dir="rtl" name="name" wire:model="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">ایمیل</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control text-left" dir="rtl" name="email" >
+                                    <input type="text" class="form-control text-left" dir="rtl" name="email" wire:model="email" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">موبایل</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control text-left"  dir="rtl" name="mobile">
+                                    <input type="text" class="form-control text-left"  dir="rtl" name="mobile" wire:model="mobile">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">پسورد</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control text-left" dir="rtl" name="password">
+                                    <input type="text" class="form-control text-left" dir="rtl" name="password" wire:model="password">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="file"> آپلود عکس </label>
-                                <input  class="col-sm-10" type="file" class="form-control-file" id="file">
+                                <input  class="col-sm-10" type="file" class="form-control-file" id="file" wire:model="image">
                             </div>
                             <div class="form-group row">
                                 <button type="submit" class="btn btn-success btn-uppercase">
@@ -50,7 +56,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">عنوان جستجو</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-left" dir="rtl" wire:model="search">
+                                <input  type="text" class="form-control text-left" dir="rtl" wire:model.live="search">
                             </div>
                         </div>
                         <table class="table table-striped table-hover">
@@ -68,16 +74,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($users as $index=>$user)
+
                             <tr>
-                                <td class="text-center align-middle"></td>
+                                <td class="text-center align-middle">{{$user->id}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar">
                                         <img src="" class="rounded-circle" alt="image">
                                     </figure>
                                 </td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center align-middle"></td>
+                                <td class="text-center align-middle">{{$user->name}}</td>
+                                <td class="text-center align-middle">{{$user->email}}</td>
+                                <td class="text-center align-middle">{{$user->mobile}}</td>
                                 <td class="text-center align-middle">
                                     <a class="btn btn-outline-info" href="#">
                                         نقش های کاربر
@@ -93,10 +101,11 @@
                                 </td>
                                 <td class="text-center align-middle"></td>
                             </tr>
-
+                            @endforeach
                         </table>
                         <div style="margin: 40px !important;"
                              class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
+                            {{$users->links()}}
                         </div>
                     </div>
                 </div>
