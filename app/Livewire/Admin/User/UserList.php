@@ -68,4 +68,8 @@ class UserList extends Component
 
         session()->flash('message', 'کاربر جدید با موفقیت ایجاد شد');
     }
+    public function deleteUser($userId){
+        User::where('id', $userId)->delete();
+        session()->flash('message', 'کاربر با موفقیت حذف شد');
+    }
 }

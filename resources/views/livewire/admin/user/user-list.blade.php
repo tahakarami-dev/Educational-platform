@@ -76,7 +76,7 @@
                         <th>عکس</th>
                         <th>نام</th>
                         <th>ایمیل</th>
-                        <th>موبایل</th>
+                        <th>عملیات</th>
                         <th>وضعیت</th>
                         <th>تاریخ ایجاد</th>
                     </tr>
@@ -87,13 +87,19 @@
                             <td>{{ $user->id }}</td>
                             <td>
                                 <img width="40" height="40" class="rounded-circle"
-                                     src="{{ $user->image
-                                        ? asset('storage/users/'.$user->image)
-                                        : asset('admin/default-avatar.png') }}">
+                                     src="{{asset('storage/users/'. $user->image)}}">
                             </td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td></td>
+                            <td>
+                                <button    type="button" class="btn btn-success">
+                                    ویرایش
+                                </button>
+                                <button    type="button"  class="btn btn-danger"    wire:click="deleteUser({{ $user->id }})"
+                                         onclick="confirm('مطمئنی؟') || event.stopImmediatePropagation()" >
+                                    حذف
+                                </button>
+                            </td>
                             <td>
                                 <span class="badge badge-success">فعال</span>
                             </td>
